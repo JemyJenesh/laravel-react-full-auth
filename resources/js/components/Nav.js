@@ -8,9 +8,12 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 import { NavLink } from "react-router-dom";
-import { SearchForm, DarkThemeToggler } from ".";
+import { AccountMenu, SearchForm, DarkThemeToggler } from ".";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/userSlice";
 
 export default function Nav() {
+	const user = useSelector(selectUser);
 	return (
 		<AppBar position="sticky" color="inherit" elevation={0}>
 			<Toolbar component={Container} maxWidth="xl">
@@ -22,9 +25,10 @@ export default function Nav() {
 				>
 					<Typography
 						variant="h5"
-						// component={NavLink}
-						// to="/"
-						// sx={{ textDecoration: "none" }}
+						component={NavLink}
+						to="/"
+						color="inherit"
+						sx={{ textDecoration: "none" }}
 					>
 						Review
 					</Typography>
@@ -39,12 +43,18 @@ export default function Nav() {
 					alignItems="center"
 				>
 					<DarkThemeToggler />
-					<Button variant="outlined" component={NavLink} to="/login">
-						Login
-					</Button>
-					<Button variant="contained" component={NavLink} to="/register">
-						Register
-					</Button>
+					{!!user ? (
+						<AccountMenu />
+					) : (
+						<>
+							<Button variant="outlined" component={NavLink} to="/login">
+								Login
+							</Button>
+							<Button variant="contained" component={NavLink} to="/register">
+								Register
+							</Button>
+						</>
+					)}
 				</Stack>
 			</Toolbar>
 			<Divider />

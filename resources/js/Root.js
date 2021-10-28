@@ -1,11 +1,15 @@
+import { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
-import { Home } from "./pages";
+import { Home, Login, Register } from "./pages";
 import "./app.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectIsDark } from "./store/themeSlice";
+import { selectIsLoading, setUser } from "./store/userSlice";
 
 export default function Root() {
 	const isDark = useSelector(selectIsDark);
@@ -35,14 +39,44 @@ export default function Root() {
 			},
 		},
 	});
+
+	const dispatch = useDispatch();
+	const isLoading = useSelector(selectIsLoading);
+
+	useEffect(() => {
+		axios
+			.get("/api/user")
+			.then((res) => {
+				dispatch(setUser(res.data));
+			})
+			.catch(() => {
+				dispatch(setUser(null));
+			});
+	}, []);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<BrowserRouter>
-				<Switch>
-					<Route exact path="/" component={Home} />
-				</Switch>
-			</BrowserRouter>
+			{isLoading ? (
+				<Box
+					sx={{
+						height: "100vh",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+				>
+					<CircularProgress />
+				</Box>
+			) : (
+				<BrowserRouter>
+					<Switch>
+						<Route exact path="/" component={Home} />
+						<Route path="/login" component={Login} />
+						<Route path="/register" component={Register} />
+					</Switch>
+				</BrowserRouter>
+			)}
 		</ThemeProvider>
 	);
 }

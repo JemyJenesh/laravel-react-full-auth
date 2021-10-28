@@ -2,7 +2,7 @@
 
 return [
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Json Api Authentication Show Token After Registration
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'show_token_after_register' => true,
+  'show_token_after_register' => false,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Json Api Authentication Logout Configuration
     |--------------------------------------------------------------------------
@@ -27,15 +27,15 @@ return [
     |
     */
 
-    'revoke_only_current_token' => false,
+  'revoke_only_current_token' => false,
 
-    'revoke_all_tokens' => false,
+  'revoke_all_tokens' => false,
 
-    'delete_current_token' => false,
+  'delete_current_token' => false,
 
-    'delete_all_tokens' => true,
+  'delete_all_tokens' => true,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Json Api Forgot Password Configuration
     |--------------------------------------------------------------------------
@@ -46,9 +46,9 @@ return [
     |
     */
 
-    'new_password_form_url' =>  env('FRONTEND_APP_URL', 'http://frontend.test') .'/new-password',
+  'new_password_form_url' =>  env('FRONTEND_APP_URL', 'http://frontend.test') . '/new-password',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Json Api Authentication Token id Configuration
     |--------------------------------------------------------------------------
@@ -57,9 +57,9 @@ return [
     |
     */
 
-    'token_id' => 'App',
+  'token_id' => 'App',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Json Api Authentication Scopes
     |--------------------------------------------------------------------------
@@ -69,11 +69,9 @@ return [
     |
     */
 
-    'scopes' => [
+  'scopes' => [],
 
-    ],
-
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Json Api Authentication Frontend Endpoints Of Verify Email Feature
     |--------------------------------------------------------------------------
@@ -84,8 +82,8 @@ return [
     |
     */
 
-    'email_account_was_already_verified_url' =>  env('FRONTEND_APP_URL', 'http://frontend.test') . '/already-verified',
+  'email_account_was_already_verified_url' =>  env('FRONTEND_APP_URL', 'http://frontend.test') . '/already-verified',
 
-    'email_account_just_verified_url' => env('FRONTEND_APP_URL', 'http://frontend.test') . '/verified',
+  'email_account_just_verified_url' => env('FRONTEND_APP_URL', 'http://frontend.test') . '/verified',
 
 ];
