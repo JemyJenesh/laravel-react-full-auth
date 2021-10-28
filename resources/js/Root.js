@@ -10,6 +10,7 @@ import "./app.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsDark } from "./store/themeSlice";
 import { selectIsLoading, setUser } from "./store/userSlice";
+import { GuestRoute } from "./components";
 
 export default function Root() {
 	const isDark = useSelector(selectIsDark);
@@ -72,8 +73,8 @@ export default function Root() {
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<Route path="/login" component={Login} />
-						<Route path="/register" component={Register} />
+						<GuestRoute path="/login" component={Login} />
+						<GuestRoute path="/register" component={Register} />
 					</Switch>
 				</BrowserRouter>
 			)}
