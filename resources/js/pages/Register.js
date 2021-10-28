@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -10,10 +11,11 @@ import Paper from "@mui/material/Paper";
 
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { WebLayout } from "../components";
+import { WebLayout, FullScreenLoader } from "../components";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
+import apiClient from "../utils/apiClient";
 
 const validationSchema = yup.object({
 	name: yup.string("Enter you full name").required("Name is required"),
@@ -30,6 +32,7 @@ const validationSchema = yup.object({
 const Register = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const formik = useFormik({
 		initialValues: {
@@ -39,8 +42,10 @@ const Register = () => {
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
-			axios
-				.post("/api/register", {
+			setIsLoading(true);
+
+			apiClient
+				.register({
 					...values,
 					password_confirmation: values.password,
 				})
@@ -48,19 +53,18 @@ const Register = () => {
 					dispatch(setUser(res.data.user));
 					history.push("/");
 				})
-				.catch(
-					(err) =>
-						err.response &&
-						console.log(Object.values(err.response.data.errors).flat())
-				);
+				.finally(() => {
+					setIsLoading(false);
+				});
 		},
 	});
 
 	return (
 		<WebLayout>
+			<FullScreenLoader open={isLoading} />
 			<Container maxWidth="md" sx={{ py: 6 }}>
 				<Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
-					Create your Inven Account
+					Create your Review Account
 				</Typography>
 
 				<form onSubmit={formik.handleSubmit}>

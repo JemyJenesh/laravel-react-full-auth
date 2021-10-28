@@ -6,7 +6,7 @@ import { WebLayout } from "../components";
 export default function Home() {
 	return (
 		<WebLayout>
-			<Container maxWidth="xl">
+			<Container maxWidth="xl" sx={{ py: 2 }}>
 				<h1>home</h1>
 				<Typography>
 					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam,

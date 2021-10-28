@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -13,7 +14,7 @@ import Link from "@mui/material/Link";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
-import { WebLayout } from "../components";
+import { WebLayout, FullScreenLoader } from "../components";
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -32,6 +33,7 @@ const validationSchema = yup.object({
 const Login = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const formik = useFormik({
 		initialValues: {
@@ -40,18 +42,25 @@ const Login = () => {
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
-			apiClient.login(values).then((res) => {
-				dispatch(setUser(res.data.user));
-				history.push("/");
-			});
+			setIsLoading(true);
+			apiClient
+				.login(values)
+				.then((res) => {
+					dispatch(setUser(res.data.user));
+					history.push("/");
+				})
+				.finally(() => {
+					setIsLoading(false);
+				});
 		},
 	});
 
 	return (
 		<WebLayout>
+			<FullScreenLoader open={isLoading} />
 			<Container maxWidth="md" sx={{ py: 6 }}>
 				<Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
-					Welcome to Inven!
+					Welcome to Review!
 				</Typography>
 
 				<form onSubmit={formik.handleSubmit}>

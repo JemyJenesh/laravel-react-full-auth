@@ -10,7 +10,7 @@ import "./app.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsDark } from "./store/themeSlice";
 import { selectIsLoading, setUser } from "./store/userSlice";
-import { GuestRoute } from "./components";
+import { FullScreenLoader, GuestRoute } from "./components";
 import { apiClient } from "./utils";
 import axios from "axios";
 import { showAlert, closeAlert } from "./store/alertSlice";
@@ -78,26 +78,15 @@ export default function Root() {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			{isLoading ? (
-				<Box
-					sx={{
-						height: "100vh",
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-				>
-					<CircularProgress />
-				</Box>
-			) : (
-				<BrowserRouter>
-					<Switch>
-						<Route exact path="/" component={Home} />
-						<GuestRoute path="/login" component={Login} />
-						<GuestRoute path="/register" component={Register} />
-					</Switch>
-				</BrowserRouter>
-			)}
+			<FullScreenLoader open={isLoading} modal={false} />
+
+			<BrowserRouter>
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<GuestRoute path="/login" component={Login} />
+					<GuestRoute path="/register" component={Register} />
+				</Switch>
+			</BrowserRouter>
 		</ThemeProvider>
 	);
 }

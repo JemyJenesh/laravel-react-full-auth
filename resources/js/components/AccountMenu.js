@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -13,22 +13,24 @@ import Logout from "@mui/icons-material/Logout";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, setUser } from "../store/userSlice";
+import apiClient from "../utils/apiClient";
+import { FullScreenLoader } from ".";
 
 const AccountMenu = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleLogout = () => {
-		axios
-			.get("/api/logout")
-			.then((res) => {
+		setIsLoading(true);
+		apiClient
+			.logout()
+			.then(() => {
 				dispatch(setUser(null));
 			})
-			.catch(
-				(err) =>
-					err.response &&
-					console.log(Object.values(err.response.data.errors).flat())
-			);
+			.finally(() => {
+				setIsLoading(true);
+			});
 	};
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
@@ -39,8 +41,9 @@ const AccountMenu = () => {
 		setAnchorEl(null);
 	};
 	return (
-		<Fragment>
+		<>
 			<Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+				<FullScreenLoader open={isLoading} />
 				<Tooltip title="Account settings">
 					<IconButton onClick={handleClick} size="small">
 						<Avatar sx={{ width: 32, height: 32 }}>{user?.name[0]}</Avatar>
@@ -107,7 +110,7 @@ const AccountMenu = () => {
 					Logout
 				</MenuItem>
 			</Menu>
-		</Fragment>
+		</>
 	);
 };
 

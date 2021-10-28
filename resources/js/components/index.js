@@ -1,6 +1,7 @@
 import AccountMenu from "./AccountMenu";
 import AuthRoute from "./AuthRoute";
 import DarkThemeToggler from "./DarkThemeToggler";
+import FullScreenLoader from "./FullScreenLoader";
 import GlobalAlert from "./GlobalAlert";
 import GuestRoute from "./GuestRoute";
 import Nav from "./Nav";
@@ -11,6 +12,7 @@ export {
 	AccountMenu,
 	AuthRoute,
 	DarkThemeToggler,
+	FullScreenLoader,
 	GlobalAlert,
 	GuestRoute,
 	Nav,
