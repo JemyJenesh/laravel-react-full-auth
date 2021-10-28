@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 import { NavLink } from "react-router-dom";
-import { AccountMenu, SearchForm, DarkThemeToggler } from ".";
+import { AccountMenu, SearchForm, DarkThemeToggler, GlobalAlert } from ".";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/userSlice";
 
@@ -58,6 +58,7 @@ export default function Nav() {
 				</Stack>
 			</Toolbar>
 			<Divider />
+			<GlobalAlert />
 		</AppBar>
 	);
 }

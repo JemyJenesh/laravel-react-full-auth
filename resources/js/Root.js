@@ -11,6 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectIsDark } from "./store/themeSlice";
 import { selectIsLoading, setUser } from "./store/userSlice";
 import { GuestRoute } from "./components";
+import { apiClient } from "./utils";
+import axios from "axios";
+import { showAlert, closeAlert } from "./store/alertSlice";
 
 export default function Root() {
 	const isDark = useSelector(selectIsDark);
@@ -45,14 +48,31 @@ export default function Root() {
 	const isLoading = useSelector(selectIsLoading);
 
 	useEffect(() => {
-		axios
-			.get("/api/user")
+		apiClient
+			.checkUser()
 			.then((res) => {
 				dispatch(setUser(res.data));
 			})
 			.catch(() => {
 				dispatch(setUser(null));
 			});
+		axios.interceptors.response.use(
+			(response) => {
+				dispatch(closeAlert());
+				return response;
+			},
+			(error) => {
+				dispatch(
+					showAlert({
+						message: error.response.data.errors
+							? Object.values(error.response.data.errors).flat()[0]
+							: error.response.data.message,
+						variant: "error",
+					})
+				);
+				return Promise.reject(error);
+			}
+		);
 	}, []);
 
 	return (

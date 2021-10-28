@@ -15,9 +15,11 @@ import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { WebLayout } from "../components";
 
-import { useDispatch } from "react-redux";
-import { setUser } from "../store/userSlice";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { setUser } from "../store/userSlice";
+import apiClient from "../utils/apiClient";
 
 const validationSchema = yup.object({
 	email: yup
@@ -38,19 +40,10 @@ const Login = () => {
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
-			axios
-				.post("/api/login", {
-					...values,
-				})
-				.then((res) => {
-					dispatch(setUser(res.data.user));
-					history.push("/");
-				})
-				.catch(
-					(err) =>
-						err.response &&
-						console.log(Object.values(err.response.data.errors).flat())
-				);
+			apiClient.login(values).then((res) => {
+				dispatch(setUser(res.data.user));
+				history.push("/");
+			});
 		},
 	});
 
