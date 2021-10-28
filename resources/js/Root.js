@@ -4,33 +4,37 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { Home } from "./pages";
 import "./app.css";
-
-const theme = createTheme({
-	palette: {
-		primary: {
-			main: "#6f42c1",
-		},
-		background: {
-			default: "#F8F9FA",
-		},
-	},
-	shape: {
-		borderRadius: 10,
-	},
-	typography: {
-		fontFamily: "Nunito, sans-serif",
-	},
-	components: {
-		MuiButton: {
-			defaultProps: {
-				disableElevation: true,
-				disableRipple: true,
-			},
-		},
-	},
-});
+import { useSelector } from "react-redux";
+import { selectIsDark } from "./store/themeSlice";
 
 export default function Root() {
+	const isDark = useSelector(selectIsDark);
+	const theme = createTheme({
+		palette: {
+			mode: isDark ? "dark" : "light",
+			primary: {
+				main: isDark ? "#B64FC8" : "#7952B3",
+			},
+			// background: {
+			// 	default: isDark ? "rgba(255, 255, 255, 0.12)" : "#F8F9FA",
+			// },
+		},
+		shape: {
+			borderRadius: 10,
+		},
+		typography: {
+			fontFamily: "Nunito, sans-serif",
+			// fontSize: 12,
+		},
+		components: {
+			MuiButton: {
+				defaultProps: {
+					disableElevation: true,
+					disableRipple: true,
+				},
+			},
+		},
+	});
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
