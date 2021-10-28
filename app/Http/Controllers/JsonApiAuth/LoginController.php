@@ -10,27 +10,28 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController
 {
-    use HasToShowApiTokens;
 
-    public function __invoke(LoginRequest $request): JsonResponse
-    {
-        try {
+  use HasToShowApiTokens;
 
-            if(Auth::attempt($request->only(['email', 'password']))) {
-                return $this->showCredentials(Auth::user());
-            }
+  protected $maxAttempts = 3; // Default is 5
 
-        } catch (Exception $exception) {
 
-            return response()->json([
-                'message' => $exception->getMessage()
-            ], 400);
+  public function __invoke(LoginRequest $request): JsonResponse
+  {
+    try {
 
-        }
+      if (Auth::attempt($request->only(['email', 'password']))) {
+        return $this->showCredentials(Auth::user());
+      }
+    } catch (Exception $exception) {
 
-        return response()->json([
-            'message' => __('json-api-auth.failed'),
-        ], 401);
-
+      return response()->json([
+        'message' => $exception->getMessage()
+      ], 400);
     }
+
+    return response()->json([
+      'message' => __('json-api-auth.failed'),
+    ], 401);
+  }
 }
