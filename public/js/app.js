@@ -33439,6 +33439,9 @@ function Root() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components__WEBPACK_IMPORTED_MODULE_6__.GuestRoute, {
           path: "/forgot-password",
           component: _pages__WEBPACK_IMPORTED_MODULE_2__.ForgotPassword
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components__WEBPACK_IMPORTED_MODULE_6__.GuestRoute, {
+          path: "/new-password",
+          component: _pages__WEBPACK_IMPORTED_MODULE_2__.NewPassword
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
           path: "/verified",
           component: _pages__WEBPACK_IMPORTED_MODULE_2__.EmailVerified
@@ -34287,6 +34290,42 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/hooks/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/hooks/index.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useUrlQuery": () => (/* reexport safe */ _useUrlQuery__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _useUrlQuery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./useUrlQuery */ "./resources/js/hooks/useUrlQuery.js");
+
+
+
+/***/ }),
+
+/***/ "./resources/js/hooks/useUrlQuery.js":
+/*!*******************************************!*\
+  !*** ./resources/js/hooks/useUrlQuery.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useUrlQuery)
+/* harmony export */ });
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+
+function useUrlQuery() {
+  return new URLSearchParams((0,react_router_dom__WEBPACK_IMPORTED_MODULE_0__.useLocation)().search);
+}
+
+/***/ }),
+
 /***/ "./resources/js/pages/EmailVerified.js":
 /*!*********************************************!*\
   !*** ./resources/js/pages/EmailVerified.js ***!
@@ -34716,6 +34755,210 @@ var Login = function Login() {
 
 /***/ }),
 
+/***/ "./resources/js/pages/NewPassword.js":
+/*!*******************************************!*\
+  !*** ./resources/js/pages/NewPassword.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_Container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Container */ "./node_modules/@mui/material/Container/Container.js");
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_Paper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/Paper */ "./node_modules/@mui/material/Paper/Paper.js");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components */ "./resources/js/components/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_alertSlice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/alertSlice */ "./resources/js/store/alertSlice.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils */ "./resources/js/utils/index.js");
+/* harmony import */ var _hooks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../hooks */ "./resources/js/hooks/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var validationSchema = yup__WEBPACK_IMPORTED_MODULE_1__.object({
+  password: yup__WEBPACK_IMPORTED_MODULE_1__.string("Enter your password").min(8, "Password should be of minimum 8 characters length").required("Password is required"),
+  password_confirmation: yup__WEBPACK_IMPORTED_MODULE_1__.string("Retype password").oneOf([yup__WEBPACK_IMPORTED_MODULE_1__.ref("password"), null], "Passwords don't match.").required("Password confirmation is required")
+});
+
+var NewPassword = function NewPassword() {
+  var query = (0,_hooks__WEBPACK_IMPORTED_MODULE_7__.useUrlQuery)();
+  var email = query.get("email");
+  var token = query.get("token");
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useDispatch)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isLoading = _useState2[0],
+      setIsLoading = _useState2[1];
+
+  var formik = (0,formik__WEBPACK_IMPORTED_MODULE_2__.useFormik)({
+    initialValues: {
+      password: "",
+      password_confirmation: "",
+      email: email
+    },
+    validationSchema: validationSchema,
+    onSubmit: function onSubmit(values, _ref) {
+      var resetForm = _ref.resetForm;
+      setIsLoading(true);
+      _utils__WEBPACK_IMPORTED_MODULE_6__.apiClient.resetPassword(_objectSpread(_objectSpread({}, values), {}, {
+        token: token
+      })).then(function (res) {
+        resetForm();
+        dispatch((0,_store_alertSlice__WEBPACK_IMPORTED_MODULE_5__.showAlert)({
+          message: "Password changed! You can now go back to login.",
+          variant: "success"
+        }));
+      })["finally"](function () {
+        setIsLoading(false);
+      });
+    }
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_components__WEBPACK_IMPORTED_MODULE_3__.WebLayout, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.FullScreenLoader, {
+      open: isLoading
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_mui_material_Container__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      maxWidth: "md",
+      sx: {
+        py: 6
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        variant: "h5",
+        gutterBottom: true,
+        sx: {
+          mb: 3
+        },
+        children: "Change your password!"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("form", {
+        onSubmit: formik.handleSubmit,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Paper__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          sx: {
+            p: 4
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_13__["default"], {
+            container: true,
+            justifyContent: "end",
+            rowSpacing: 3,
+            columnSpacing: 4,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              item: true,
+              xs: 12,
+              md: 6,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_14__["default"], {
+                autoFocus: true,
+                autoComplete: "off",
+                fullWidth: true,
+                id: "password",
+                name: "password",
+                type: "password",
+                label: "New password",
+                size: "small",
+                value: formik.values.password,
+                onChange: formik.handleChange,
+                error: formik.touched.password && Boolean(formik.errors.password),
+                helperText: formik.touched.password && formik.errors.password
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              item: true,
+              xs: 12,
+              md: 6,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_14__["default"], {
+                inputProps: {
+                  readOnly: true
+                },
+                autoComplete: "off",
+                fullWidth: true,
+                id: "email",
+                name: "email",
+                type: "email",
+                label: "Email",
+                size: "small",
+                value: formik.values.email,
+                onChange: formik.handleChange
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              item: true,
+              xs: 12,
+              md: 6,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_14__["default"], {
+                autoComplete: "off",
+                fullWidth: true,
+                id: "password_confirmation",
+                name: "password_confirmation",
+                type: "password",
+                label: "Confirm Password",
+                size: "small",
+                value: formik.values.password_confirmation,
+                onChange: formik.handleChange,
+                error: formik.touched.password_confirmation && Boolean(formik.errors.password_confirmation),
+                helperText: formik.touched.password_confirmation && formik.errors.password_confirmation
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              item: true,
+              xs: 12,
+              md: 6,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_15__["default"], {
+                size: "large",
+                type: "submit",
+                fullWidth: true,
+                variant: "contained",
+                children: "Change password"
+              })
+            })]
+          })
+        })
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewPassword);
+
+/***/ }),
+
 /***/ "./resources/js/pages/Register.js":
 /*!****************************************!*\
   !*** ./resources/js/pages/Register.js ***!
@@ -34942,13 +35185,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ForgotPassword": () => (/* reexport safe */ _ForgotPassword__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__["default"]),
 /* harmony export */   "Login": () => (/* reexport safe */ _Login__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   "Register": () => (/* reexport safe */ _Register__WEBPACK_IMPORTED_MODULE_4__["default"])
+/* harmony export */   "NewPassword": () => (/* reexport safe */ _NewPassword__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "Register": () => (/* reexport safe */ _Register__WEBPACK_IMPORTED_MODULE_5__["default"])
 /* harmony export */ });
 /* harmony import */ var _EmailVerified__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EmailVerified */ "./resources/js/pages/EmailVerified.js");
 /* harmony import */ var _ForgotPassword__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ForgotPassword */ "./resources/js/pages/ForgotPassword.js");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./resources/js/pages/Home.js");
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Login */ "./resources/js/pages/Login.js");
-/* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Register */ "./resources/js/pages/Register.js");
+/* harmony import */ var _NewPassword__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NewPassword */ "./resources/js/pages/NewPassword.js");
+/* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Register */ "./resources/js/pages/Register.js");
+
 
 
 
@@ -35147,6 +35393,9 @@ var apiClient = {
   },
   forgotPassword: function forgotPassword(data) {
     return axios.post("api/forgot-password", data);
+  },
+  resetPassword: function resetPassword(data) {
+    return axios.post("/api/reset-password	", data);
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (apiClient);

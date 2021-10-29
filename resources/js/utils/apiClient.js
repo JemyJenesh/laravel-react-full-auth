@@ -5,6 +5,7 @@ const apiClient = {
 	logout: () => axios.get("/api/logout"),
 	emailVerification: () => axios.post("/api/email/verification-notification"),
 	forgotPassword: (data) => axios.post("api/forgot-password", data),
+	resetPassword: (data) => axios.post("/api/reset-password	", data),
 };
 
 export default apiClient;
