@@ -44,9 +44,10 @@ const Login = () => {
 				.login(values)
 				.then((res) => {
 					dispatch(setUser(res.data.user));
+					setIsLoading(false);
 					history.push("/");
 				})
-				.finally(() => {
+				.catch(() => {
 					setIsLoading(false);
 				});
 		},

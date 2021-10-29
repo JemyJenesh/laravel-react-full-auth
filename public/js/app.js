@@ -32440,8 +32440,9 @@ var AccountMenu = function AccountMenu() {
   var handleLogout = function handleLogout() {
     setIsLoading(true);
     _utils_apiClient__WEBPACK_IMPORTED_MODULE_3__["default"].logout().then(function () {
+      setIsLoading(true);
       dispatch((0,_store_userSlice__WEBPACK_IMPORTED_MODULE_2__.setUser)(null));
-    })["finally"](function () {
+    })["catch"](function () {
       setIsLoading(true);
     });
   };
@@ -33469,8 +33470,9 @@ var Login = function Login() {
       setIsLoading(true);
       _utils__WEBPACK_IMPORTED_MODULE_6__.apiClient.login(values).then(function (res) {
         dispatch((0,_store_userSlice__WEBPACK_IMPORTED_MODULE_5__.setUser)(res.data.user));
+        setIsLoading(false);
         history.push("/");
-      })["finally"](function () {
+      })["catch"](function () {
         setIsLoading(false);
       });
     }
@@ -33877,8 +33879,9 @@ var Register = function Register() {
         password_confirmation: values.password
       })).then(function (res) {
         dispatch((0,_store_userSlice__WEBPACK_IMPORTED_MODULE_5__.setUser)(res.data.user));
+        setIsLoading(false);
         history.push("/");
-      })["finally"](function () {
+      })["catch"](function () {
         setIsLoading(false);
       });
     }

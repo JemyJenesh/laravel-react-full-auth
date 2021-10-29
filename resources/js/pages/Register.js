@@ -48,9 +48,10 @@ const Register = () => {
 				})
 				.then((res) => {
 					dispatch(setUser(res.data.user));
+					setIsLoading(false);
 					history.push("/");
 				})
-				.finally(() => {
+				.catch(() => {
 					setIsLoading(false);
 				});
 		},

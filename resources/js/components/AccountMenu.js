@@ -26,9 +26,10 @@ const AccountMenu = () => {
 		apiClient
 			.logout()
 			.then(() => {
+				setIsLoading(true);
 				dispatch(setUser(null));
 			})
-			.finally(() => {
+			.catch(() => {
 				setIsLoading(true);
 			});
 	};
