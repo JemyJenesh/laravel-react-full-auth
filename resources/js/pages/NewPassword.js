@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { WebLayout, FullScreenLoader } from "../components";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showAlert } from "../store/alertSlice";
 import { apiClient } from "../utils";
@@ -31,7 +30,6 @@ const NewPassword = () => {
 	const email = query.get("email");
 	const token = query.get("token");
 	const dispatch = useDispatch();
-	const history = useHistory();
 	const [isLoading, setIsLoading] = useState(false);
 
 	const formik = useFormik({

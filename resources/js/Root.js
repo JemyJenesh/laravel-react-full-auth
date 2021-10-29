@@ -67,6 +67,7 @@ export default function Root() {
 				return response;
 			},
 			(error) => {
+				dispatch(closeAlert());
 				dispatch(
 					showAlert({
 						message: error.response.data.errors

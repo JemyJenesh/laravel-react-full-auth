@@ -16,7 +16,7 @@ export default function GlobalAlert() {
 	useEffect(() => {
 		const timeId = setTimeout(() => {
 			handleClick();
-		}, 10000);
+		}, 5000);
 
 		return () => {
 			clearTimeout(timeId);

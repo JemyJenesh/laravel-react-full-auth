@@ -4,7 +4,7 @@ import { WebLayout } from "../components";
 export default function EmailVerified() {
 	return (
 		<WebLayout>
-			<Typography align="cente">Your email is verified!</Typography>
+			<Typography align="center">Your email is verified!</Typography>
 		</WebLayout>
 	);
 }

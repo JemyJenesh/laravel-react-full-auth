@@ -1,8 +1,5 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -118,18 +115,6 @@ const Register = () => {
 									}
 									helperText={formik.touched.password && formik.errors.password}
 								/>
-							</Grid>
-							<Grid item xs={12} md={6}>
-								<FormGroup>
-									<FormControlLabel
-										control={<Checkbox defaultChecked size="small" />}
-										label={
-											<Typography variant="caption">
-												I want to receive exclusive offers and promotions.
-											</Typography>
-										}
-									/>
-								</FormGroup>
 							</Grid>
 							<Grid item xs={12} md={6}>
 								<Button

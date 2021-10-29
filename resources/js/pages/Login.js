@@ -1,8 +1,5 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -130,16 +127,10 @@ const Login = () => {
 								<Box
 									sx={{
 										display: "flex",
-										justifyContent: "space-between",
+										justifyContent: "flex-end",
 										alignItems: "center",
 									}}
 								>
-									<FormGroup>
-										<FormControlLabel
-											control={<Checkbox defaultChecked size="small" />}
-											label={<Typography>Remember me</Typography>}
-										/>
-									</FormGroup>
 									<Link
 										underline="hover"
 										component={NavLink}
