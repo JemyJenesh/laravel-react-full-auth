@@ -20,7 +20,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { setUser } from "../store/userSlice";
-import apiClient from "../utils/apiClient";
+import { apiClient } from "../utils";
 
 const validationSchema = yup.object({
 	email: yup
@@ -74,6 +74,7 @@ const Login = () => {
 						>
 							<Grid item xs={12} md={6}>
 								<TextField
+									autoFocus
 									fullWidth
 									id="email"
 									name="email"

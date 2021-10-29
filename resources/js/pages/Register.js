@@ -15,7 +15,7 @@ import { WebLayout, FullScreenLoader } from "../components";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
-import apiClient from "../utils/apiClient";
+import { apiClient } from "../utils";
 
 const validationSchema = yup.object({
 	name: yup.string("Enter you full name").required("Name is required"),
@@ -77,6 +77,7 @@ const Register = () => {
 						>
 							<Grid item xs={12} md={6}>
 								<TextField
+									autoFocus
 									fullWidth
 									id="email"
 									name="email"

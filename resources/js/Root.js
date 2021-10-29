@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { EmailVerified, Home, Login, Register } from "./pages";
+import { EmailVerified, ForgotPassword, Home, Login, Register } from "./pages";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsDark } from "./store/themeSlice";
 import { selectIsLoading, setUser } from "./store/userSlice";
@@ -83,6 +83,7 @@ export default function Root() {
 					<Route exact path="/" component={Home} />
 					<GuestRoute path="/login" component={Login} />
 					<GuestRoute path="/register" component={Register} />
+					<GuestRoute path="/forgot-password" component={ForgotPassword} />
 					<AuthRoute path="/verified" component={EmailVerified} />
 					<Route path="/already-verified">
 						<Redirect to="/verified" />

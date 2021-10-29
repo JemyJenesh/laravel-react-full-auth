@@ -8,32 +8,39 @@ use Illuminate\Validation\Rule;
 
 class PasswordResetLinkRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+  /**
+   * Determine if the user is authorized to make this request.
+   *
+   * @return bool
+   */
+  public function authorize(): bool
+  {
+    return true;
+  }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules(): array
-    {
-        return [
-            'email' => ['required', 'email', Rule::exists(User::class)],
-        ];
-    }
+  /**
+   * Get the validation rules that apply to the request.
+   *
+   * @return array
+   */
+  public function rules(): array
+  {
+    return [
+      'email' => ['required', 'email', Rule::exists(User::class)],
+    ];
+  }
 
-    public function getUser()
-    {
-        $email = $this->get('email');
+  public function messages()
+  {
+    return [
+      'email.exists' => "The email address does't exist.",
+    ];
+  }
 
-        return User::query()->where('email', $email)->first();
-    }
+  public function getUser()
+  {
+    $email = $this->get('email');
+
+    return User::query()->where('email', $email)->first();
+  }
 }
