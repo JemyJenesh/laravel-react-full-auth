@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
@@ -11,6 +12,17 @@ export default function GlobalAlert() {
 	const dispatch = useDispatch();
 
 	const handleClick = () => dispatch(closeAlert());
+
+	useEffect(() => {
+		const timeId = setTimeout(() => {
+			handleClick();
+		}, 5000);
+
+		return () => {
+			clearTimeout(timeId);
+		};
+	}, [open]);
+
 	return (
 		<Collapse in={open}>
 			<Alert

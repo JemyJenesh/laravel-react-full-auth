@@ -8,57 +8,66 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 import { NavLink } from "react-router-dom";
-import { AccountMenu, SearchForm, DarkThemeToggler, GlobalAlert } from ".";
+import {
+	AccountMenu,
+	EmailVerificationAlert,
+	SearchForm,
+	DarkThemeToggler,
+	GlobalAlert,
+} from ".";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/userSlice";
 
 export default function Nav() {
 	const user = useSelector(selectUser);
 	return (
-		<AppBar position="sticky" color="inherit" elevation={0}>
-			<Toolbar component={Container} maxWidth="xl">
-				<Stack
-					direction="row"
-					spacing={2}
-					alignItems="center"
-					sx={{ flexBasis: "30%" }}
-				>
-					<Typography
-						variant="h5"
-						component={NavLink}
-						to="/"
-						color="inherit"
-						sx={{ textDecoration: "none" }}
+		<>
+			<EmailVerificationAlert />
+			<AppBar position="sticky" color="inherit" elevation={0}>
+				<Toolbar component={Container} maxWidth="xl">
+					<Stack
+						direction="row"
+						spacing={2}
+						alignItems="center"
+						sx={{ flexBasis: "30%" }}
 					>
-						Review
-					</Typography>
-				</Stack>
-				<Box sx={{ flexBasis: "40%" }}>
-					<SearchForm />
-				</Box>
-				<Stack
-					direction="row"
-					spacing={2}
-					sx={{ ml: "auto" }}
-					alignItems="center"
-				>
-					<DarkThemeToggler />
-					{!!user ? (
-						<AccountMenu />
-					) : (
-						<>
-							<Button variant="outlined" component={NavLink} to="/login">
-								Login
-							</Button>
-							<Button variant="contained" component={NavLink} to="/register">
-								Register
-							</Button>
-						</>
-					)}
-				</Stack>
-			</Toolbar>
-			<Divider />
-			<GlobalAlert />
-		</AppBar>
+						<Typography
+							variant="h5"
+							component={NavLink}
+							to="/"
+							color="inherit"
+							sx={{ textDecoration: "none" }}
+						>
+							Review
+						</Typography>
+					</Stack>
+					<Box sx={{ flexBasis: "40%" }}>
+						<SearchForm />
+					</Box>
+					<Stack
+						direction="row"
+						spacing={2}
+						sx={{ ml: "auto" }}
+						alignItems="center"
+					>
+						<DarkThemeToggler />
+						{!!user ? (
+							<AccountMenu />
+						) : (
+							<>
+								<Button variant="outlined" component={NavLink} to="/login">
+									Login
+								</Button>
+								<Button variant="contained" component={NavLink} to="/register">
+									Register
+								</Button>
+							</>
+						)}
+					</Stack>
+				</Toolbar>
+				<Divider />
+				<GlobalAlert />
+			</AppBar>
+		</>
 	);
 }

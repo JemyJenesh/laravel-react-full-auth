@@ -33341,13 +33341,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Root)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _app_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.css */ "./resources/js/app.css");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
 /* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/system/esm/ThemeProvider/ThemeProvider.js");
 /* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
-/* harmony import */ var _pages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages */ "./resources/js/pages/index.js");
-/* harmony import */ var _app_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.css */ "./resources/js/app.css");
+/* harmony import */ var _pages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages */ "./resources/js/pages/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_themeSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/themeSlice */ "./resources/js/store/themeSlice.js");
 /* harmony import */ var _store_userSlice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/userSlice */ "./resources/js/store/userSlice.js");
@@ -33357,8 +33357,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _store_alertSlice__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/alertSlice */ "./resources/js/store/alertSlice.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
 
 
 
@@ -33431,13 +33429,21 @@ function Root() {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
           exact: true,
           path: "/",
-          component: _pages__WEBPACK_IMPORTED_MODULE_1__.Home
+          component: _pages__WEBPACK_IMPORTED_MODULE_2__.Home
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components__WEBPACK_IMPORTED_MODULE_6__.GuestRoute, {
           path: "/login",
-          component: _pages__WEBPACK_IMPORTED_MODULE_1__.Login
+          component: _pages__WEBPACK_IMPORTED_MODULE_2__.Login
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components__WEBPACK_IMPORTED_MODULE_6__.GuestRoute, {
           path: "/register",
-          component: _pages__WEBPACK_IMPORTED_MODULE_1__.Register
+          component: _pages__WEBPACK_IMPORTED_MODULE_2__.Register
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
+          path: "/verified",
+          component: _pages__WEBPACK_IMPORTED_MODULE_2__.EmailVerified
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+          path: "/already-verified",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Redirect, {
+            to: "/verified"
+          })
         })]
       })
     })]
@@ -33721,13 +33727,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var AuthRoute = function AuthRoute(_ref) {
-  var name = _ref.name,
-      Component = _ref.component,
+  var Component = _ref.component,
       path = _ref.path;
   var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(_store_userSlice__WEBPACK_IMPORTED_MODULE_1__.selectUser);
+  var isLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(_store_userSlice__WEBPACK_IMPORTED_MODULE_1__.selectIsLoading);
+  if (isLoading) return null;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_3__.Route, {
     exact: true,
-    name: name,
     path: path,
     render: function render(props) {
       return user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Component, _objectSpread({}, props)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_3__.Redirect, {
@@ -33776,6 +33782,92 @@ function DarkThemeToggler() {
     onClick: handleClick,
     children: isDark ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_icons_material_Brightness7__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_icons_material_Brightness4__WEBPACK_IMPORTED_MODULE_5__["default"], {})
   });
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/EmailVerificationAlert.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/EmailVerificationAlert.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ EmailVerificationAlert)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! . */ "./resources/js/components/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_userSlice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/userSlice */ "./resources/js/store/userSlice.js");
+/* harmony import */ var _store_alertSlice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/alertSlice */ "./resources/js/store/alertSlice.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+function EmailVerificationAlert() {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
+  var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(_store_userSlice__WEBPACK_IMPORTED_MODULE_4__.selectUser);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isLoading = _useState2[0],
+      setIsLoading = _useState2[1];
+
+  var handleClick = function handleClick() {
+    setIsLoading(true);
+    _utils__WEBPACK_IMPORTED_MODULE_2__.apiClient.emailVerification().then(function () {
+      dispatch((0,_store_alertSlice__WEBPACK_IMPORTED_MODULE_5__.showAlert)({
+        message: "Email verification link sent!",
+        variant: "success"
+      }));
+    })["finally"](function () {
+      return setIsLoading(false);
+    });
+  };
+
+  if (user && !user.email_verified_at) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(___WEBPACK_IMPORTED_MODULE_1__.FullScreenLoader, {
+      open: isLoading
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      sx: {
+        borderRadius: 0
+      },
+      severity: "warning",
+      action: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        color: "inherit",
+        size: "small",
+        onClick: handleClick,
+        children: "Resend link"
+      }),
+      children: "Please verify your email!"
+    })]
+  });
+  return null;
 }
 
 /***/ }),
@@ -33848,13 +33940,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ GlobalAlert)
 /* harmony export */ });
-/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
-/* harmony import */ var _mui_material_Collapse__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Collapse */ "./node_modules/@mui/material/Collapse/Collapse.js");
-/* harmony import */ var _mui_icons_material_Close__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/icons-material/Close */ "./node_modules/@mui/icons-material/Close.js");
-/* harmony import */ var _mui_material_IconButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/IconButton */ "./node_modules/@mui/material/IconButton/IconButton.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_alertSlice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/alertSlice */ "./resources/js/store/alertSlice.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
+/* harmony import */ var _mui_material_Collapse__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Collapse */ "./node_modules/@mui/material/Collapse/Collapse.js");
+/* harmony import */ var _mui_icons_material_Close__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/icons-material/Close */ "./node_modules/@mui/icons-material/Close.js");
+/* harmony import */ var _mui_material_IconButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/IconButton */ "./node_modules/@mui/material/IconButton/IconButton.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_alertSlice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/alertSlice */ "./resources/js/store/alertSlice.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -33863,30 +33957,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function GlobalAlert() {
-  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(_store_alertSlice__WEBPACK_IMPORTED_MODULE_1__.selectAlert),
+  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_store_alertSlice__WEBPACK_IMPORTED_MODULE_2__.selectAlert),
       open = _useSelector.open,
       message = _useSelector.message,
       variant = _useSelector.variant;
 
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useDispatch)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
 
   var handleClick = function handleClick() {
-    return dispatch((0,_store_alertSlice__WEBPACK_IMPORTED_MODULE_1__.closeAlert)());
+    return dispatch((0,_store_alertSlice__WEBPACK_IMPORTED_MODULE_2__.closeAlert)());
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Collapse__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var timeId = setTimeout(function () {
+      handleClick();
+    }, 5000);
+    return function () {
+      clearTimeout(timeId);
+    };
+  }, [open]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Collapse__WEBPACK_IMPORTED_MODULE_4__["default"], {
     "in": open,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_5__["default"], {
       sx: {
         borderRadius: 0
       },
       severity: variant,
-      action: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      action: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
         "aria-label": "close",
         color: "inherit",
         size: "small",
         onClick: handleClick,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_icons_material_Close__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_icons_material_Close__WEBPACK_IMPORTED_MODULE_7__["default"], {
           fontSize: "inherit"
         })
       }),
@@ -33924,13 +34026,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var GuestRoute = function GuestRoute(_ref) {
-  var name = _ref.name,
-      Component = _ref.component,
+  var Component = _ref.component,
       path = _ref.path;
   var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(_store_userSlice__WEBPACK_IMPORTED_MODULE_1__.selectUser);
+  var isLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(_store_userSlice__WEBPACK_IMPORTED_MODULE_1__.selectIsLoading);
+  if (isLoading) return null;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
     exact: true,
-    name: name,
     path: path,
     render: function render(props) {
       return !user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Component, _objectSpread({}, props)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Redirect, {
@@ -33985,57 +34087,59 @@ __webpack_require__.r(__webpack_exports__);
 
 function Nav() {
   var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_store_userSlice__WEBPACK_IMPORTED_MODULE_2__.selectUser);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_AppBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    position: "sticky",
-    color: "inherit",
-    elevation: 0,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      component: _mui_material_Container__WEBPACK_IMPORTED_MODULE_6__["default"],
-      maxWidth: "xl",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        direction: "row",
-        spacing: 2,
-        alignItems: "center",
-        sx: {
-          flexBasis: "30%"
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          variant: "h5",
-          component: react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink,
-          to: "/",
-          color: "inherit",
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.EmailVerificationAlert, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_AppBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      position: "sticky",
+      color: "inherit",
+      elevation: 0,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        component: _mui_material_Container__WEBPACK_IMPORTED_MODULE_6__["default"],
+        maxWidth: "xl",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          direction: "row",
+          spacing: 2,
+          alignItems: "center",
           sx: {
-            textDecoration: "none"
+            flexBasis: "30%"
           },
-          children: "Review"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        sx: {
-          flexBasis: "40%"
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.SearchForm, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        direction: "row",
-        spacing: 2,
-        sx: {
-          ml: "auto"
-        },
-        alignItems: "center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.DarkThemeToggler, {}), !!user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.AccountMenu, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
-            variant: "outlined",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            variant: "h5",
             component: react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink,
-            to: "/login",
-            children: "Login"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
-            variant: "contained",
-            component: react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink,
-            to: "/register",
-            children: "Register"
+            to: "/",
+            color: "inherit",
+            sx: {
+              textDecoration: "none"
+            },
+            children: "Review"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          sx: {
+            flexBasis: "40%"
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.SearchForm, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          direction: "row",
+          spacing: 2,
+          sx: {
+            ml: "auto"
+          },
+          alignItems: "center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.DarkThemeToggler, {}), !!user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.AccountMenu, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              variant: "outlined",
+              component: react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink,
+              to: "/login",
+              children: "Login"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              variant: "contained",
+              component: react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink,
+              to: "/register",
+              children: "Register"
+            })]
           })]
         })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_12__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.GlobalAlert, {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_12__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.GlobalAlert, {})]
+    })]
   });
 }
 
@@ -34113,8 +34217,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ WebLayout)
 /* harmony export */ });
+/* harmony import */ var _mui_material_Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Container */ "./node_modules/@mui/material/Container/Container.js");
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ "./resources/js/components/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -34122,7 +34228,13 @@ __webpack_require__.r(__webpack_exports__);
 function WebLayout(_ref) {
   var children = _ref.children;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.Nav, {}), children]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(___WEBPACK_IMPORTED_MODULE_0__.Nav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      maxWidth: "xl",
+      sx: {
+        py: 2
+      },
+      children: children
+    })]
   });
 }
 
@@ -34140,22 +34252,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AccountMenu": () => (/* reexport safe */ _AccountMenu__WEBPACK_IMPORTED_MODULE_0__["default"]),
 /* harmony export */   "AuthRoute": () => (/* reexport safe */ _AuthRoute__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "DarkThemeToggler": () => (/* reexport safe */ _DarkThemeToggler__WEBPACK_IMPORTED_MODULE_2__["default"]),
-/* harmony export */   "FullScreenLoader": () => (/* reexport safe */ _FullScreenLoader__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   "GlobalAlert": () => (/* reexport safe */ _GlobalAlert__WEBPACK_IMPORTED_MODULE_4__["default"]),
-/* harmony export */   "GuestRoute": () => (/* reexport safe */ _GuestRoute__WEBPACK_IMPORTED_MODULE_5__["default"]),
-/* harmony export */   "Nav": () => (/* reexport safe */ _Nav__WEBPACK_IMPORTED_MODULE_6__["default"]),
-/* harmony export */   "SearchForm": () => (/* reexport safe */ _SearchForm__WEBPACK_IMPORTED_MODULE_7__["default"]),
-/* harmony export */   "WebLayout": () => (/* reexport safe */ _WebLayout__WEBPACK_IMPORTED_MODULE_8__["default"])
+/* harmony export */   "EmailVerificationAlert": () => (/* reexport safe */ _EmailVerificationAlert__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   "FullScreenLoader": () => (/* reexport safe */ _FullScreenLoader__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "GlobalAlert": () => (/* reexport safe */ _GlobalAlert__WEBPACK_IMPORTED_MODULE_5__["default"]),
+/* harmony export */   "GuestRoute": () => (/* reexport safe */ _GuestRoute__WEBPACK_IMPORTED_MODULE_6__["default"]),
+/* harmony export */   "Nav": () => (/* reexport safe */ _Nav__WEBPACK_IMPORTED_MODULE_7__["default"]),
+/* harmony export */   "SearchForm": () => (/* reexport safe */ _SearchForm__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   "WebLayout": () => (/* reexport safe */ _WebLayout__WEBPACK_IMPORTED_MODULE_9__["default"])
 /* harmony export */ });
 /* harmony import */ var _AccountMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountMenu */ "./resources/js/components/AccountMenu.js");
 /* harmony import */ var _AuthRoute__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthRoute */ "./resources/js/components/AuthRoute.js");
 /* harmony import */ var _DarkThemeToggler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DarkThemeToggler */ "./resources/js/components/DarkThemeToggler.js");
-/* harmony import */ var _FullScreenLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FullScreenLoader */ "./resources/js/components/FullScreenLoader.js");
-/* harmony import */ var _GlobalAlert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GlobalAlert */ "./resources/js/components/GlobalAlert.js");
-/* harmony import */ var _GuestRoute__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./GuestRoute */ "./resources/js/components/GuestRoute.js");
-/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Nav */ "./resources/js/components/Nav.js");
-/* harmony import */ var _SearchForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SearchForm */ "./resources/js/components/SearchForm.js");
-/* harmony import */ var _WebLayout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./WebLayout */ "./resources/js/components/WebLayout.js");
+/* harmony import */ var _EmailVerificationAlert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EmailVerificationAlert */ "./resources/js/components/EmailVerificationAlert.js");
+/* harmony import */ var _FullScreenLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FullScreenLoader */ "./resources/js/components/FullScreenLoader.js");
+/* harmony import */ var _GlobalAlert__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./GlobalAlert */ "./resources/js/components/GlobalAlert.js");
+/* harmony import */ var _GuestRoute__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./GuestRoute */ "./resources/js/components/GuestRoute.js");
+/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Nav */ "./resources/js/components/Nav.js");
+/* harmony import */ var _SearchForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SearchForm */ "./resources/js/components/SearchForm.js");
+/* harmony import */ var _WebLayout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./WebLayout */ "./resources/js/components/WebLayout.js");
 
 
 
@@ -34166,6 +34280,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/EmailVerified.js":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/EmailVerified.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ EmailVerified)
+/* harmony export */ });
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components */ "./resources/js/components/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+function EmailVerified() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.WebLayout, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      align: "cente",
+      children: "Your email is verified!"
+    })
+  });
+}
 
 /***/ }),
 
@@ -34180,28 +34323,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Home)
 /* harmony export */ });
-/* harmony import */ var _mui_material_Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Container */ "./node_modules/@mui/material/Container/Container.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components */ "./resources/js/components/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
-
 function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.WebLayout, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_Container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      maxWidth: "xl",
-      sx: {
-        py: 2
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-        children: "home"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        children: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, esse adipisci qui consequatur hic enim quam tempora! Quo doloremque repellendus quis molestias. Hic at debitis iusto quidem temporibus quod illo quos ea facere, neque eum repellendus quae sunt deserunt nesciunt consequuntur modi minima, recusandae dolor consectetur rerum et aliquid porro soluta? Voluptatem error, soluta voluptate eveniet sit asperiores sunt fugit placeat, autem, nemo impedit dolorum similique assumenda nisi nam ratione ex illo deleniti maiores cupiditate a nesciunt deserunt illum! Odio autem obcaecati eligendi debitis quidem neque non rerum maxime pariatur nostrum? Maiores, facilis eveniet quas ipsa voluptates perferendis deleniti, corrupti temporibus animi vel porro fugiat, consectetur architecto tenetur error esse. Quis consectetur consequatur ex repudiandae, tempore asperiores nostrum! Laudantium at, dolorum omnis veniam ullam hic recusandae? Repudiandae recusandae voluptates dolores soluta numquam aperiam quisquam, sequi nostrum. Ullam ea beatae minima eius officiis excepturi accusantium placeat culpa provident laborum hic impedit quae eum iusto, expedita esse voluptate! Voluptates in suscipit dolor possimus officiis facere similique nesciunt totam consequatur commodi sit repellendus consequuntur repellat labore sequi ducimus quae, fugiat distinctio esse non, facilis tempora corrupti! Consequuntur earum possimus ipsum a ratione quasi rerum fuga saepe animi illum, adipisci assumenda magni repellendus. Iusto doloremque sint dolor ad nisi amet architecto ex repudiandae repellendus at ratione quisquam assumenda provident fugiat molestias accusantium, voluptatum ut, totam, delectus vero corporis. Nobis adipisci aliquam ex natus placeat libero exercitationem nesciunt asperiores, unde, explicabo dolores sequi numquam totam incidunt ducimus perspiciatis odit facere perferendis a delectus ipsa accusamus cupiditate repudiandae voluptatum. Neque libero in error aliquam blanditiis doloribus reiciendis harum, natus temporibus voluptas ea molestiae tenetur, voluptatum iste dicta consequuntur aut labore repellat voluptates corrupti, maxime quidem perferendis. Quidem fuga distinctio neque, repellat magni nulla itaque! Qui, asperiores quidem! Esse accusamus minima neque incidunt perspiciatis vitae sit ea sunt modi maxime quidem amet veritatis explicabo numquam, error iure? Beatae possimus itaque, ullam iure rem, sequi et omnis, ea deserunt dolores soluta neque dicta tenetur amet dolore adipisci. Blanditiis voluptatum architecto exercitationem optio facilis dolor, nobis ullam fugiat perspiciatis libero culpa dolores nulla possimus maxime vero, sunt accusantium eum. Placeat, consequatur aliquid asperiores impedit minus consectetur voluptates cumque quia possimus, nesciunt quas culpa odio, voluptatum molestias eius. Eius, a. Ratione architecto dolores veritatis consectetur cum porro libero incidunt quae. Quas beatae animi quidem, cumque voluptatum nostrum. Veniam molestiae harum porro unde. Aliquid expedita, consequuntur doloribus hic maxime aperiam, itaque commodi cum dolorum, vel dolorem laborum ut sit? Laborum dolore officia facilis ab, ut recusandae temporibus explicabo, eos aspernatur delectus eveniet. Temporibus, ipsam ea! Earum reprehenderit ab eveniet ut repellat dolorum excepturi distinctio, voluptas deserunt molestiae, nostrum quas fuga adipisci culpa animi commodi mollitia odio. Natus cupiditate itaque assumenda. Quisquam beatae quasi quidem soluta, neque, iure iusto rem qui sequi asperiores sint maxime et nesciunt fugiat autem perferendis molestiae libero voluptatem natus veniam cupiditate veritatis quo? Harum veniam eum cupiditate nesciunt ullam at quaerat, optio obcaecati exercitationem totam commodi voluptatem consequuntur voluptatibus. Minus laborum quos nam aut mollitia ab eligendi! Aut omnis repudiandae necessitatibus tempora explicabo, vel odio voluptates nisi? Culpa in, asperiores quisquam quos voluptatem dolor impedit! Sint dignissimos minus labore dicta assumenda suscipit ad eos sequi necessitatibus qui beatae corporis quos, doloribus alias recusandae! Quisquam nemo quod dolores voluptates possimus earum illum sunt libero fugiat? Sequi, nihil quidem a ea fuga in veniam cum iste unde exercitationem autem quas, nam quaerat et voluptate tempore tenetur! Dolorum inventore nisi dolorem porro blanditiis nam ratione eligendi assumenda rerum ad suscipit minima delectus qui officiis velit, et voluptates aut atque eius at dolores? Placeat provident dolore exercitationem obcaecati fuga a, animi mollitia asperiores facilis error fugiat maxime illum, excepturi iure. Harum officiis laudantium iste earum illum sit quasi unde animi impedit vero reprehenderit ullam fugiat fugit odit repellat similique, nostrum asperiores voluptates quis quia laboriosam reiciendis velit. Blanditiis quae porro, quidem placeat est aut possimus numquam totam aliquam quia et, tempora nesciunt cumque, a odit. Sunt quam repudiandae repellendus corporis ab saepe deleniti dolores alias quis officia iste, consequuntur sapiente doloribus? Omnis earum consequuntur odio est similique temporibus fugiat quaerat accusamus natus, incidunt delectus debitis ea, recusandae, ipsam tempore asperiores sequi? Dignissimos corrupti accusantium accusamus, tenetur ad atque delectus aut aspernatur libero veritatis perferendis molestias laboriosam porro veniam ipsum ipsa repellendus rerum doloribus distinctio numquam dolorum earum, incidunt facilis. Sed, fugiat dignissimos! Quisquam, maiores architecto blanditiis vel expedita consequatur nostrum inventore doloribus sunt quia ipsam molestiae iure obcaecati porro ab dicta at enim rerum libero. Odit nesciunt corporis asperiores exercitationem. Blanditiis accusamus unde asperiores in ut ea rem molestias corporis quos officiis a iusto, minima aut nostrum tempora quaerat sed, sequi praesentium quidem laboriosam corrupti nesciunt numquam perspiciatis qui! Animi tempora magni amet? Officiis tempora esse quam, saepe adipisci quod officia voluptate recusandae natus in cum ad suscipit eum minima facere voluptas atque, iusto reprehenderit rerum hic repellendus maiores quasi, asperiores tempore? Quaerat dolorum sit aliquam, optio officiis cum similique commodi laudantium, deleniti ab consequuntur nobis fuga nemo ut quia aut earum ea impedit placeat quidem omnis vel perferendis. Adipisci soluta quis cumque sint perferendis, deleniti reiciendis sit libero aspernatur eum itaque natus. Sint sed corporis minus eos beatae non, cum, deleniti labore, cupiditate quam illum sunt perspiciatis voluptate explicabo aspernatur modi. Illo fugit fugiat voluptate odio eveniet alias provident doloribus id quae commodi nesciunt mollitia reiciendis, debitis possimus assumenda consectetur non repellat dignissimos accusamus cupiditate, excepturi dolore repellendus? Dicta voluptatem praesentium sequi repellendus quibusdam esse tenetur alias quae, commodi sit qui delectus, incidunt rerum vero animi. Impedit dolorem nulla illum obcaecati quasi fugit, molestiae laborum labore quam tenetur unde soluta, dolor eum quae, tempore fugiat. Deserunt quibusdam sapiente, assumenda dignissimos laborum perferendis! Obcaecati inventore enim, vel eveniet dolorem ratione reprehenderit unde nihil placeat in provident aperiam, dignissimos molestias. Consectetur ullam vero blanditiis odit qui odio hic. Porro consequuntur ab fuga accusantium unde ipsam quis earum, suscipit consectetur corporis ducimus officiis aut in ullam enim delectus. Temporibus, totam aliquam. Praesentium harum, consequatur facere minima odit consequuntur voluptatum illo aliquid dicta velit!"
-      })]
-    })
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_components__WEBPACK_IMPORTED_MODULE_0__.WebLayout, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+      children: "home"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, esse adipisci qui consequatur hic enim quam tempora! Quo doloremque repellendus quis molestias. Hic at debitis iusto quidem temporibus quod illo quos ea facere, neque eum repellendus quae sunt deserunt nesciunt consequuntur modi minima, recusandae dolor consectetur rerum et aliquid porro soluta? Voluptatem error, soluta voluptate eveniet sit asperiores sunt fugit placeat, autem, nemo impedit dolorum similique assumenda nisi nam ratione ex illo deleniti maiores cupiditate a nesciunt deserunt illum! Odio autem obcaecati eligendi debitis quidem neque non rerum maxime pariatur nostrum? Maiores, facilis eveniet quas ipsa voluptates perferendis deleniti, corrupti temporibus animi vel porro fugiat, consectetur architecto tenetur error esse. Quis consectetur consequatur ex repudiandae, tempore asperiores nostrum! Laudantium at, dolorum omnis veniam ullam hic recusandae? Repudiandae recusandae voluptates dolores soluta numquam aperiam quisquam, sequi nostrum. Ullam ea beatae minima eius officiis excepturi accusantium placeat culpa provident laborum hic impedit quae eum iusto, expedita esse voluptate! Voluptates in suscipit dolor possimus officiis facere similique nesciunt totam consequatur commodi sit repellendus consequuntur repellat labore sequi ducimus quae, fugiat distinctio esse non, facilis tempora corrupti! Consequuntur earum possimus ipsum a ratione quasi rerum fuga saepe animi illum, adipisci assumenda magni repellendus. Iusto doloremque sint dolor ad nisi amet architecto ex repudiandae repellendus at ratione quisquam assumenda provident fugiat molestias accusantium, voluptatum ut, totam, delectus vero corporis. Nobis adipisci aliquam ex natus placeat libero exercitationem nesciunt asperiores, unde, explicabo dolores sequi numquam totam incidunt ducimus perspiciatis odit facere perferendis a delectus ipsa accusamus cupiditate repudiandae voluptatum. Neque libero in error aliquam blanditiis doloribus reiciendis harum, natus temporibus voluptas ea molestiae tenetur, voluptatum iste dicta consequuntur aut labore repellat voluptates corrupti, maxime quidem perferendis. Quidem fuga distinctio neque, repellat magni nulla itaque! Qui, asperiores quidem! Esse accusamus minima neque incidunt perspiciatis vitae sit ea sunt modi maxime quidem amet veritatis explicabo numquam, error iure? Beatae possimus itaque, ullam iure rem, sequi et omnis, ea deserunt dolores soluta neque dicta tenetur amet dolore adipisci. Blanditiis voluptatum architecto exercitationem optio facilis dolor, nobis ullam fugiat perspiciatis libero culpa dolores nulla possimus maxime vero, sunt accusantium eum. Placeat, consequatur aliquid asperiores impedit minus consectetur voluptates cumque quia possimus, nesciunt quas culpa odio, voluptatum molestias eius. Eius, a. Ratione architecto dolores veritatis consectetur cum porro libero incidunt quae. Quas beatae animi quidem, cumque voluptatum nostrum. Veniam molestiae harum porro unde. Aliquid expedita, consequuntur doloribus hic maxime aperiam, itaque commodi cum dolorum, vel dolorem laborum ut sit? Laborum dolore officia facilis ab, ut recusandae temporibus explicabo, eos aspernatur delectus eveniet. Temporibus, ipsam ea! Earum reprehenderit ab eveniet ut repellat dolorum excepturi distinctio, voluptas deserunt molestiae, nostrum quas fuga adipisci culpa animi commodi mollitia odio. Natus cupiditate itaque assumenda. Quisquam beatae quasi quidem soluta, neque, iure iusto rem qui sequi asperiores sint maxime et nesciunt fugiat autem perferendis molestiae libero voluptatem natus veniam cupiditate veritatis quo? Harum veniam eum cupiditate nesciunt ullam at quaerat, optio obcaecati exercitationem totam commodi voluptatem consequuntur voluptatibus. Minus laborum quos nam aut mollitia ab eligendi! Aut omnis repudiandae necessitatibus tempora explicabo, vel odio voluptates nisi? Culpa in, asperiores quisquam quos voluptatem dolor impedit! Sint dignissimos minus labore dicta assumenda suscipit ad eos sequi necessitatibus qui beatae corporis quos, doloribus alias recusandae! Quisquam nemo quod dolores voluptates possimus earum illum sunt libero fugiat? Sequi, nihil quidem a ea fuga in veniam cum iste unde exercitationem autem quas, nam quaerat et voluptate tempore tenetur! Dolorum inventore nisi dolorem porro blanditiis nam ratione eligendi assumenda rerum ad suscipit minima delectus qui officiis velit, et voluptates aut atque eius at dolores? Placeat provident dolore exercitationem obcaecati fuga a, animi mollitia asperiores facilis error fugiat maxime illum, excepturi iure. Harum officiis laudantium iste earum illum sit quasi unde animi impedit vero reprehenderit ullam fugiat fugit odit repellat similique, nostrum asperiores voluptates quis quia laboriosam reiciendis velit. Blanditiis quae porro, quidem placeat est aut possimus numquam totam aliquam quia et, tempora nesciunt cumque, a odit. Sunt quam repudiandae repellendus corporis ab saepe deleniti dolores alias quis officia iste, consequuntur sapiente doloribus? Omnis earum consequuntur odio est similique temporibus fugiat quaerat accusamus natus, incidunt delectus debitis ea, recusandae, ipsam tempore asperiores sequi? Dignissimos corrupti accusantium accusamus, tenetur ad atque delectus aut aspernatur libero veritatis perferendis molestias laboriosam porro veniam ipsum ipsa repellendus rerum doloribus distinctio numquam dolorum earum, incidunt facilis. Sed, fugiat dignissimos! Quisquam, maiores architecto blanditiis vel expedita consequatur nostrum inventore doloribus sunt quia ipsam molestiae iure obcaecati porro ab dicta at enim rerum libero. Odit nesciunt corporis asperiores exercitationem. Blanditiis accusamus unde asperiores in ut ea rem molestias corporis quos officiis a iusto, minima aut nostrum tempora quaerat sed, sequi praesentium quidem laboriosam corrupti nesciunt numquam perspiciatis qui! Animi tempora magni amet? Officiis tempora esse quam, saepe adipisci quod officia voluptate recusandae natus in cum ad suscipit eum minima facere voluptas atque, iusto reprehenderit rerum hic repellendus maiores quasi, asperiores tempore? Quaerat dolorum sit aliquam, optio officiis cum similique commodi laudantium, deleniti ab consequuntur nobis fuga nemo ut quia aut earum ea impedit placeat quidem omnis vel perferendis. Adipisci soluta quis cumque sint perferendis, deleniti reiciendis sit libero aspernatur eum itaque natus. Sint sed corporis minus eos beatae non, cum, deleniti labore, cupiditate quam illum sunt perspiciatis voluptate explicabo aspernatur modi. Illo fugit fugiat voluptate odio eveniet alias provident doloribus id quae commodi nesciunt mollitia reiciendis, debitis possimus assumenda consectetur non repellat dignissimos accusamus cupiditate, excepturi dolore repellendus? Dicta voluptatem praesentium sequi repellendus quibusdam esse tenetur alias quae, commodi sit qui delectus, incidunt rerum vero animi. Impedit dolorem nulla illum obcaecati quasi fugit, molestiae laborum labore quam tenetur unde soluta, dolor eum quae, tempore fugiat. Deserunt quibusdam sapiente, assumenda dignissimos laborum perferendis! Obcaecati inventore enim, vel eveniet dolorem ratione reprehenderit unde nihil placeat in provident aperiam, dignissimos molestias. Consectetur ullam vero blanditiis odit qui odio hic. Porro consequuntur ab fuga accusantium unde ipsam quis earum, suscipit consectetur corporis ducimus officiis aut in ullam enim delectus. Temporibus, totam aliquam. Praesentium harum, consequatur facere minima odit consequuntur voluptatum illo aliquid dicta velit!"
+    })]
   });
 }
 
@@ -34646,13 +34781,16 @@ var Register = function Register() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_0__["default"]),
-/* harmony export */   "Login": () => (/* reexport safe */ _Login__WEBPACK_IMPORTED_MODULE_1__["default"]),
-/* harmony export */   "Register": () => (/* reexport safe */ _Register__WEBPACK_IMPORTED_MODULE_2__["default"])
+/* harmony export */   "EmailVerified": () => (/* reexport safe */ _EmailVerified__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "Login": () => (/* reexport safe */ _Login__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "Register": () => (/* reexport safe */ _Register__WEBPACK_IMPORTED_MODULE_3__["default"])
 /* harmony export */ });
-/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home */ "./resources/js/pages/Home.js");
-/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login */ "./resources/js/pages/Login.js");
-/* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Register */ "./resources/js/pages/Register.js");
+/* harmony import */ var _EmailVerified__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EmailVerified */ "./resources/js/pages/EmailVerified.js");
+/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ "./resources/js/pages/Home.js");
+/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login */ "./resources/js/pages/Login.js");
+/* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Register */ "./resources/js/pages/Register.js");
+
 
 
 
@@ -34843,6 +34981,9 @@ var apiClient = {
   },
   logout: function logout() {
     return axios.get("/api/logout");
+  },
+  emailVerification: function emailVerification() {
+    return axios.post("/api/email/verification-notification");
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (apiClient);

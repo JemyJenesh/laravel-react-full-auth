@@ -1,7 +1,8 @@
 <?php
 
-use App\Actions\JsonApiAuth\AuthKit;
 use Illuminate\Http\Request;
+use App\Actions\JsonApiAuth\AuthKit;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+  return new UserResource($request->user());
 });
 
 require __DIR__ . '/json-api-auth.php';

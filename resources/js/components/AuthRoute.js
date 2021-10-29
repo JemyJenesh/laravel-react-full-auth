@@ -1,14 +1,16 @@
 import { useSelector } from "react-redux";
-import { selectUser } from "../store/userSlice";
+import { selectIsLoading, selectUser } from "../store/userSlice";
 import { Route, Redirect } from "react-router";
 
-const AuthRoute = ({ name, component: Component, path }) => {
+const AuthRoute = ({ component: Component, path }) => {
 	const user = useSelector(selectUser);
+	const isLoading = useSelector(selectIsLoading);
+
+	if (isLoading) return null;
 
 	return (
 		<Route
 			exact
-			name={name}
 			path={path}
 			render={(props) =>
 				user ? <Component {...props} /> : <Redirect to="/login" />

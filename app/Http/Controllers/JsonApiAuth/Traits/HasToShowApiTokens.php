@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\JsonApiAuth\Traits;
 
-use App\Http\Controllers\JsonApiAuth\Actions\AuthKit;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use App\Http\Resources\UserResource;
+use App\Http\Controllers\JsonApiAuth\Actions\AuthKit;
 
 trait HasToShowApiTokens
 {
@@ -13,7 +14,7 @@ trait HasToShowApiTokens
   {
     $response = [
       'message' => __('json-api-auth.success'),
-      'user' => $user,
+      'user' => new UserResource($user),
     ];
 
     if ($showToken) {

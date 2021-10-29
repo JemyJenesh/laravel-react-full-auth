@@ -1,16 +1,14 @@
 import { useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./app.css";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 
-import { Home, Login, Register } from "./pages";
-import "./app.css";
+import { EmailVerified, Home, Login, Register } from "./pages";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsDark } from "./store/themeSlice";
 import { selectIsLoading, setUser } from "./store/userSlice";
-import { FullScreenLoader, GuestRoute } from "./components";
+import { AuthRoute, FullScreenLoader, GuestRoute } from "./components";
 import { apiClient } from "./utils";
 import axios from "axios";
 import { showAlert, closeAlert } from "./store/alertSlice";
@@ -85,6 +83,10 @@ export default function Root() {
 					<Route exact path="/" component={Home} />
 					<GuestRoute path="/login" component={Login} />
 					<GuestRoute path="/register" component={Register} />
+					<AuthRoute path="/verified" component={EmailVerified} />
+					<Route path="/already-verified">
+						<Redirect to="/verified" />
+					</Route>
 				</Switch>
 			</BrowserRouter>
 		</ThemeProvider>

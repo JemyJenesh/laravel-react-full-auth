@@ -3,6 +3,7 @@ const apiClient = {
 	login: (data) => axios.post("/api/login", data),
 	register: (data) => axios.post("/api/register", data),
 	logout: () => axios.get("/api/logout"),
+	emailVerification: () => axios.post("/api/email/verification-notification"),
 };
 
 export default apiClient;

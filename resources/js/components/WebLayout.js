@@ -1,10 +1,13 @@
+import Container from "@mui/material/Container";
 import { Nav } from ".";
 
 export default function WebLayout({ children }) {
 	return (
 		<>
 			<Nav />
-			{children}
+			<Container maxWidth="xl" sx={{ py: 2 }}>
+				{children}
+			</Container>
 		</>
 	);
 }
